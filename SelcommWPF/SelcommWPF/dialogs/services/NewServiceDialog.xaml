@@ -1,0 +1,390 @@
+﻿<UserControl x:Class="SelcommWPF.dialogs.accounts.NewServiceDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:ctr="clr-namespace:SelcommWPF.controls"
+             xmlns:p="clr-namespace:SelcommWPF.Properties"
+             mc:Ignorable="d">
+    <Grid>
+        <materialDesign:Card Width="1000" Height="800" Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="LabelDialogTitle" Content="{x:Static p:Resources.New_Service}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Grid.Row="0" Margin="10"/>
+                <TabControl x:Name="TabServices" Grid.Row="1" materialDesign:ColorZoneAssist.Mode="Standard" materialDesign:ElevationAssist.Elevation="Dp0" 
+                            Style="{StaticResource MaterialDesignNavigationRailTabControl}" Background="White" SelectionChanged="TabServices_SelectionChanged">
+                    <TabItem Header="{x:Static p:Resources.Details}" Width="100">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="ComboServiceType" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Service_Type}"
+                                          Margin="10" FontSize="16" Grid.Row="0" Grid.Column="0" SelectionChanged="ComboServiceType_SelectionChanged"/>
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"
+                                        Content="{x:Static p:Resources.SQ}" Click="ButtonSQ_Click" Visibility="Hidden" x:Name="ButtonSQ"/>
+                                <TextBox x:Name="TextServiceNumber" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Service_Number}"
+                                          Margin="10" FontSize="16" Grid.Row="1" Grid.Column="0" Visibility="Hidden"/>
+                                <Button x:Name="ButtonPreferred" Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10" Grid.Row="1" Grid.Column="1" 
+                                        HorizontalAlignment="Left" Content="{x:Static p:Resources.Preferred}" Visibility="Hidden" Click="ButtonPreferred_Click"/>
+                                <ComboBox x:Name="ComboStatus" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Status}"
+                                          Margin="10" FontSize="16" Grid.Row="2" Grid.Column="0" Visibility="Hidden"/>
+                                <TextBox x:Name="TextServiceNarrative" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Service_Narrative}"
+                                          Margin="10" FontSize="16" Grid.Row="2" Grid.Column="1" Visibility="Hidden"/>
+                                <DatePicker x:Name="DatePickerConnected" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Date_Connected}"
+                                          Margin="10" FontSize="16" Grid.Row="3" Grid.Column="0" Visibility="Hidden"/>
+                                <TextBox x:Name="TextEnquiryPassword" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Enquiry_Password}"
+                                          Margin="10" FontSize="16" Grid.Row="3" Grid.Column="1" Visibility="Hidden"/>
+                                <ComboBox x:Name="ComboParents" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Parent}"
+                                          Margin="10" FontSize="16" Grid.Row="4" Grid.Column="0" Visibility="Hidden"/>
+                            </Grid>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="10">
+                                <Button x:Name="ButtonNext" Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonNext_Click" Tag="0" 
+                                        Visibility="Hidden">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{x:Static p:Resources.Next}" Padding="0"/>
+                                        <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Attibutes}" Width="100" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Border BorderThickness="1" BorderBrush="#ddd" Margin="10">
+                                <ListView x:Name="ListAttributes">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="250">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Attribute}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="300">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Value}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <TextBox Text="{Binding Default}" Width="250" Padding="0" Visibility="{Binding VisibleCurrency}"  FontSize="16" 
+                                                                     materialDesign:HintAssist.IsFloating="True" PreviewTextInput="TextInteger_PreviewTextInput" x:Name="TextCurrency"
+                                                                     Tag="{Binding Optional}" TextChanged="TextPrice_TextChanged"/>
+                                                            <TextBox Text="{Binding Default}" Width="250" Padding="0" Visibility="{Binding VisibleString}" FontSize="16"
+                                                                     materialDesign:HintAssist.IsFloating="True" Tag="{Binding Optional}" LostFocus="TextAttributes_LostFocus"/>
+                                                            <ToggleButton IsChecked="{Binding Default}" Width="250" Padding="0" Visibility="{Binding VisibleBoolean}"
+                                                                           Tag="{Binding Optional}"/>
+                                                            <DatePicker SelectedDate="{Binding Default}" Width="250" Padding="0" Visibility="{Binding VisibleDate}"  FontSize="16"
+                                                                        materialDesign:HintAssist.IsFloating="True" Tag="{Binding Optional}"/>
+                                                            <TextBox Text="{Binding Default}" Width="250" Padding="0" Visibility="{Binding VisibleInteger}"  FontSize="16" 
+                                                                     materialDesign:HintAssist.IsFloating="True" PreviewTextInput="TextInteger_PreviewTextInput"
+                                                                     Tag="{Binding Optional}" />
+                                                            <TextBox Text="{Binding Default}" Width="250" Padding="0" Visibility="{Binding VisibleDecimal}"  FontSize="16" 
+                                                                     materialDesign:HintAssist.IsFloating="True" PreviewTextInput="TextDecimal_PreviewTextInput"
+                                                                     Tag="{Binding Optional}" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="10">
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonPrev_Click" Tag="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ChevronLeft" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.Prev}" Padding="0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonNext_Click" Tag="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{x:Static p:Resources.Next}" Padding="0"/>
+                                        <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Plans}" Width="100" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" VerticalAlignment="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="10" >
+                                    <TextBox x:Name="TextPlans" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Plan}" materialDesign:HintAssist.IsFloating="True"
+                                             TextChanged="TextPlans_TextChanged" KeyUp="TextPlans_KeyUp"/>
+                                    <materialDesign:Card x:Name="CardPlans" Grid.Row="1" Margin="0,5,0,0" Visibility="Collapsed">
+                                        <ListView x:Name="ListPlans" FontSize="16" MouseUp="ListPlans_MouseUp" KeyUp="ListPlans_KeyUp" MaxHeight="150"/>
+                                    </materialDesign:Card>
+                                </StackPanel>
+                                <ComboBox x:Name="ComboOptions" FontSize="16" Grid.Column="1" Grid.Row="0" materialDesign:HintAssist.Hint="{x:Static p:Resources.Option}" 
+                                     Margin="10" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Top"/>
+                                <Button x:Name="ButtonDetail" Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="20" Grid.Column="2" IsEnabled="False"
+                                        Content="{x:Static p:Resources.Detail}" VerticalAlignment="Top" Click="ButtonPlanDetail_Click"/>
+                            </Grid>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="10">
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonPrev_Click" Tag="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ChevronLeft" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.Prev}" Padding="0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonNext_Click" Tag="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{x:Static p:Resources.Next}" Padding="0"/>
+                                        <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Addresses}" Width="100" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Button Style="{StaticResource MaterialDesignPaperLightButton}" Grid.Row="0" HorizontalAlignment="Right" Margin="10" Click="ButtonAddressAdd_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Center"/>
+                                            <Label Content="{x:Static p:Resources.Add_Address}" Padding="0" Margin="10,0,0,0"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                                <ScrollViewer x:Name="ScrollViewAddress" Grid.Row="1">
+                                    <StackPanel x:Name="PanelAddress" Orientation="Vertical" MinHeight="50" Margin="10"/>
+                                </ScrollViewer>
+                            </Grid>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="10">
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonPrev_Click" Tag="3">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ChevronLeft" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.Prev}" Padding="0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonNext_Click" Tag="3">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{x:Static p:Resources.Next}" Padding="0"/>
+                                        <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Sites}" Width="100" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="10">
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonPrev_Click" Tag="4">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ChevronLeft" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.Prev}" Padding="0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonNext_Click" Tag="4">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{x:Static p:Resources.Next}" Padding="0"/>
+                                        <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Cost_Centres}" Width="100" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="10">
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonPrev_Click" Tag="5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ChevronLeft" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.Prev}" Padding="0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonNext_Click" Tag="5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{x:Static p:Resources.Next}" Padding="0"/>
+                                        <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Service_Groups}" Width="120" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="10">
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonPrev_Click" Tag="6">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ChevronLeft" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.Prev}" Padding="0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonNext_Click" Tag="6">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{x:Static p:Resources.Next}" Padding="0"/>
+                                        <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Network_Elements}" Width="130" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="10">
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonPrev_Click" Tag="7">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ChevronLeft" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.Prev}" Padding="0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonNext_Click" Tag="7">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{x:Static p:Resources.Next}" Padding="0"/>
+                                        <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Related_Contacts}" Width="120" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Button Style="{StaticResource MaterialDesignPaperLightButton}" Grid.Row="0" HorizontalAlignment="Right" Margin="10" Click="ButtonContactAdd_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Center"/>
+                                            <Label Content="{x:Static p:Resources.Add_Contact}" Padding="0" Margin="10,0,0,0"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                                <ScrollViewer Grid.Row="1" x:Name="ScrollViewContact">
+                                    <StackPanel x:Name="PanelContact" Orientation="Vertical" MinHeight="50" Margin="10"/>
+                                </ScrollViewer>
+                            </Grid>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="10">
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonPrev_Click" Tag="8">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ChevronLeft" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.Prev}" Padding="0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonNext_Click" Tag="8">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{x:Static p:Resources.Next}" Padding="0"/>
+                                        <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Documents}" Width="100" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="10">
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonPrev_Click" Tag="9">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ChevronLeft" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.Prev}" Padding="0"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonNext_Click" Tag="9">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{x:Static p:Resources.Next}" Padding="0"/>
+                                        <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Notifications}" Width="100" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="10">
+                                <Button Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="5" Click="ButtonPrev_Click" Tag="10">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ChevronLeft" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.Prev}" Padding="0"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="10">
+                    <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                            Margin="10,5" Click="ButtonClose_Click"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:DialogHost HorizontalAlignment="Center" VerticalAlignment="Center" Identifier="DetailDialog">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel />
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" />
+        </Grid>
+    </Grid>
+</UserControl>

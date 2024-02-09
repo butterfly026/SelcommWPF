@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="SelcommWPF.dialogs.contacts.EmailDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ctr="clr-namespace:SelcommWPF.controls" 
+             xmlns:p="clr-namespace:SelcommWPF.Properties"
+             xmlns:Controls="clr-namespace:WpfRichText;assembly=WpfRichText" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <Grid>
+        <materialDesign:Card Width="900" Padding="20">
+            <Grid>
+                <StackPanel Orientation="Vertical">
+                    <Label x:Name="LabelDialogTitle" Content="{x:Static p:Resources.Email}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <ComboBox x:Name="ComboEmailTo" VerticalContentAlignment="Center" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.To1}" 
+                          IsEditable="True" materialDesign:HintAssist.IsFloating="true" KeyDown="TextBoxEmailTo_KeyDown"/>
+                    <WrapPanel x:Name="PanelTagTo" Orientation="Horizontal" Margin="0,10"/>
+                    <ComboBox x:Name="ComboEmailBCC" VerticalContentAlignment="Center" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.BCC}" 
+                          IsEditable="True" materialDesign:HintAssist.IsFloating="true" KeyDown="TextBoxEmailBCC_KeyDown"/>
+                    <WrapPanel x:Name="PanelTagBCC" Orientation="Horizontal" Margin="0,10"/>
+                    <TextBox x:Name="TextEmailSubject" VerticalContentAlignment="Center" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Subject}"  
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="TextEmailSubject_TextChanged"/>
+                    <Controls:RichTextEditor x:Name="RichTextEmail" Margin="0,20" Height="200"
+								IsContextMenuEnabled="True"  IsToolBarVisible="True"  IsReadOnly="False"								
+								Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"
+								Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+								BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{x:Static p:Resources.Existing_Docments}" FontSize="16" Padding="0"/>
+                        <ToggleButton x:Name="ToggleDocumment" Margin="10,0,0,0" Checked="ToggleDocumment_Checked" Unchecked="ToggleDocumment_Checked"/>
+                    </StackPanel>
+                    <Grid x:Name="GridDocuments" Visibility="Collapsed">
+                        <TextBox x:Name="TextDocuments" materialDesign:HintAssist.Hint="{x:Static p:Resources.Existing_Docments}" FontSize="16" materialDesign:HintAssist.IsFloating="True" 
+                                 IsReadOnly="True" MouseDown="TextDocument_MouseDown"/>
+                        <materialDesign:PackIcon Kind="MenuDown" VerticalAlignment="Center" HorizontalAlignment="Right" Height="20" Width="20" Foreground="#555"/>
+                    </Grid>
+                    <DatePicker x:Name="DatePickerDue" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Due_Date1}" FontSize="16" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+                        <Button x:Name="ButtonSendEmail" Content="{x:Static p:Resources.Send_Email}" Width="130" IsEnabled="False" Margin="10,5" 
+                            Style="{StaticResource MaterialDesignPaperLightButton}" Click="ButtonSendEmail_Click"/>
+                        <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                            Margin="10,5" Click="ButtonClose_Click"/>
+                    </StackPanel>
+                </StackPanel>
+                <materialDesign:Card x:Name="CardDocuments" VerticalAlignment="Bottom" Margin="0,0,0,100" Visibility="Collapsed">
+                    <ListView x:Name="ListDocuments" MinHeight="150" LostFocus="ListDocuments_LostFocus" ScrollViewer.ScrollChanged="ListDocuments_ScrollChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Name}" FontSize="16" IsChecked="{Binding Selected}" VerticalContentAlignment="Bottom" Margin="5"
+                                          Checked="CheckDocument_Checked" Unchecked="CheckDocument_Checked" Tag="{Binding Id}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListView>
+                </materialDesign:Card>
+            </Grid>
+        </materialDesign:Card>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,242 @@
+﻿<UserControl x:Class="SelcommWPF.dialogs.trans.InvoiceDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:SelcommWPF.Properties"
+             xmlns:ctr="clr-namespace:SelcommWPF.controls" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <Grid>
+        <materialDesign:Card Width="900" Height="700" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="LabelDialogTitle" Content="{x:Static p:Resources.Invoice}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Grid.Row="0"/>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TextNumber" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Number}" materialDesign:HintAssist.IsFloating="True" 
+                                 Grid.Row="0" Grid.Column="0" IsEnabled="False" Margin="10"/>
+                        <TextBox x:Name="TextAmount" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Amount1}" materialDesign:HintAssist.IsFloating="True" 
+                                 Grid.Row="0" Grid.Column="1" Margin="10" PreviewTextInput="TextAmount_PreviewTextInput" TextChanged="TextAmount_TextChanged"/>
+                        <TextBox x:Name="TextTax" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Tax}" materialDesign:HintAssist.IsFloating="True"
+                                 Grid.Row="1" Grid.Column="0" Margin="10" PreviewTextInput="TextAmount_PreviewTextInput" TextChanged="TextAmount_TextChanged"/>
+                        <DatePicker x:Name="DatePickerInvoice" materialDesign:HintAssist.Hint="{x:Static p:Resources.Date1}" Grid.Column="1" Grid.Row="1" 
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontSize="16" Margin="10" SelectedDateChanged="DatePickerInvoice_SelectedDateChanged"/>
+                        <DatePicker x:Name="DatePickerDue" materialDesign:HintAssist.Hint="{x:Static p:Resources.Due_Date}" Grid.Column="0" Grid.Row="2" 
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontSize="16" Margin="10"/>
+                        <ComboBox x:Name="ComboCategory" materialDesign:HintAssist.Hint="{x:Static p:Resources.Category}" Grid.Column="1" Grid.Row="2" materialDesign:HintAssist.IsFloating="True"
+                                  FontSize="16" Margin="10"/>
+                        <ComboBox x:Name="ComboReason" materialDesign:HintAssist.Hint="{x:Static p:Resources.Reason}" Grid.Column="0" Grid.Row="3" materialDesign:HintAssist.IsFloating="True"
+                                  FontSize="16" Margin="10"/>
+                        <TextBox x:Name="TextReference" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Other_Reference}" materialDesign:HintAssist.IsFloating="True" 
+                                 Grid.Row="3" Grid.Column="1" Margin="10"/>
+                    </Grid>
+                    <TabControl HorizontalContentAlignment="Left" materialDesign:ColorZoneAssist.Mode="SecondaryMid" Grid.Row="1">
+                        <TabItem Header="{x:Static p:Resources.Charges}">
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <ListView x:Name="ListCharges" Grid.Row="0" SelectionChanged="ListCharges_SelectionChanged">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding DefinitionId}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Code}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Description}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Description}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Quantity}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Quantity1}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn>
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Unit_Price1}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Label Content="{Binding PriceText}" HorizontalContentAlignment="Right" Width="80" Padding="0"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn>
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Total_Price}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Label Content="{Binding CostText}" HorizontalContentAlignment="Right" Width="80" Padding="0"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding DiscountType}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Discount_Type1}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding DiscountAmountText}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Discount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding From}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Start}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding To}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.End}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding AdditionalDescription}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Additional_Description}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding NumberOfInstances}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Instances}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding CustomerReference}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Customer_Reference}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Reference}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Reference}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding OtherReference}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Other_Reference}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+                                    <Button Content="{x:Static p:Resources.Add}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10,5" Click="ButtonAddCharge_Click"/>
+                                    <Button Content="{x:Static p:Resources.Update}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10,5" Click="ButtonUpdateCharge_Click"
+                                            x:Name="ButtonUpdate" IsEnabled="False"/>
+                                    <Button Content="{x:Static p:Resources.Remove}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10,5" Click="ButtonRemoveCharge_Click"
+                                            x:Name="ButtonRemove" IsEnabled="False"/>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="{x:Static p:Resources.Product}">
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <ListView x:Name="ListProducts" Grid.Row="0" SelectionChanged="ListProducts_SelectionChanged">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding ProductId}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Product_Id}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding OverrideDescription}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Override_Description}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Quantity}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Quantity1}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn>
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Unit_Price1}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Label Content="{Binding UnitPriceText}" HorizontalContentAlignment="Right" Width="80" Padding="0"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn>
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Total_Price}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Label Content="{Binding TotalPriceText}" HorizontalContentAlignment="Right" Width="80" Padding="0"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding SerialsText}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Serial}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Note}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Note}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+                                    <Button Content="{x:Static p:Resources.Add}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10,5" Click="ButtonAddProduct_Click"/>
+                                    <Button x:Name="ButtonProductUpdate" Content="{x:Static p:Resources.Update}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10,5" 
+                                            Click="ButtonUpdateProduct_Click" IsEnabled="False"/>
+                                    <Button x:Name="ButtonProductRemove" Content="{x:Static p:Resources.Remove}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10,5" 
+                                            Click="ButtonRemoveProduct_Click" IsEnabled="False"/>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="{x:Static p:Resources.Note}">
+                            <TextBox x:Name="TextNote" Height="100" Padding="5" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" 
+                                     TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  materialDesign:HintAssist.Hint="{x:Static p:Resources.Note}" Margin="5"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                    <Button Content="{x:Static p:Resources.Save}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10" Click="ButtonSave_Click" x:Name="ButtonSave"
+                            IsEnabled="False"/>
+                    <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10" Click="ButtonClose_Click"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:DialogHost HorizontalAlignment="Center" VerticalAlignment="Center" Identifier="DetailDialog">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel />
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" />
+        </Grid>
+    </Grid>
+</UserControl>

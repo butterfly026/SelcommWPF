@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account_No" xml:space="preserve">
+    <value>Número de cuenta</value>
+  </data>
+  <data name="Account_No_Hint" xml:space="preserve">
+    <value>Escriba el número de contacto o el nombre para buscar</value>
+  </data>
+  <data name="Add_Note" xml:space="preserve">
+    <value>Add Note</value>
+  </data>
+  <data name="Alert" xml:space="preserve">
+    <value>Añadir la nota</value>
+  </data>
+  <data name="App_Title" xml:space="preserve">
+    <value>Atención al cliente de Selcomm</value>
+  </data>
+  <data name="Bills" xml:space="preserve">
+    <value>Añadir la nota</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Cambio</value>
+  </data>
+  <data name="Change_Password" xml:space="preserve">
+    <value>Cambia la contraseña</value>
+  </data>
+  <data name="Change_Password_Note" xml:space="preserve">
+    <value>La longitud de la contraseña debe tener un mínimo de 4 caracteres. Para una contraseña segura, se recomienda utilizar al menos una mayúscula + carácter especial y/o número</value>
+  </data>
+  <data name="Change_Type" xml:space="preserve">
+    <value>Cambiar tipo</value>
+  </data>
+  <data name="Confirm_Password" xml:space="preserve">
+    <value>Confirmar contraseña *</value>
+  </data>
+  <data name="Correspondence" xml:space="preserve">
+    <value>_Correspondencia</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Contar</value>
+  </data>
+  <data name="Creator" xml:space="preserve">
+    <value>Creadora</value>
+  </data>
+  <data name="Date_Time" xml:space="preserve">
+    <value>Fecha y hora</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detalles</value>
+  </data>
+  <data name="Devices" xml:space="preserve">
+    <value>Dispositivos</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Documentos</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Enter_Account_No" xml:space="preserve">
+    <value>Por favor, introduzca el número de cuenta.</value>
+  </data>
+  <data name="Enter_New_Password" xml:space="preserve">
+    <value>Por favor, introduzca una nueva contraseña.</value>
+  </data>
+  <data name="Enter_Note" xml:space="preserve">
+    <value>Por favor ingrese nota.</value>
+  </data>
+  <data name="Enter_Old_Password" xml:space="preserve">
+    <value>Por favor, introduzca la contraseña actual.</value>
+  </data>
+  <data name="Enter_Password" xml:space="preserve">
+    <value>Por favor, ingrese contraseña.</value>
+  </data>
+  <data name="Enter_User_Id" xml:space="preserve">
+    <value>Por favor ingrese ID de usuario.</value>
+  </data>
+  <data name="Equipment" xml:space="preserve">
+    <value>Equipo</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>E_ventos</value>
+  </data>
+  <data name="Field_Require" xml:space="preserve">
+    <value>Se requiere campo.</value>
+  </data>
+  <data name="Financials" xml:space="preserve">
+    <value>F_inanzas</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>¿Estás segura de terminarlo?</value>
+  </data>
+  <data name="Forgot_Password" xml:space="preserve">
+    <value>Has olvidado tu contraseña</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>De</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Artículo</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Acceso</value>
+  </data>
+  <data name="Login_Fail" xml:space="preserve">
+    <value>Error de inicio de sesion.</value>
+  </data>
+  <data name="Loyalty" xml:space="preserve">
+    <value>Lealtad</value>
+  </data>
+  <data name="Menu_Account" xml:space="preserve">
+    <value>_Cuenta</value>
+  </data>
+  <data name="Menu_Appearnace" xml:space="preserve">
+    <value>Apariciones</value>
+  </data>
+  <data name="Menu_Changes" xml:space="preserve">
+    <value>Cambios</value>
+  </data>
+  <data name="Menu_Cost_Center" xml:space="preserve">
+    <value>Centro de Costo</value>
+  </data>
+  <data name="Menu_Exit" xml:space="preserve">
+    <value>_Salida</value>
+  </data>
+  <data name="Menu_File" xml:space="preserve">
+    <value>_Expediente</value>
+  </data>
+  <data name="Menu_Hidden_Grid_Buttons" xml:space="preserve">
+    <value>Ocultar botones de cuadrícula</value>
+  </data>
+  <data name="Menu_List" xml:space="preserve">
+    <value>Lista</value>
+  </data>
+  <data name="Menu_Lists" xml:space="preserve">
+    <value>Listas</value>
+  </data>
+  <data name="Menu_Options" xml:space="preserve">
+    <value>_Opciones</value>
+  </data>
+  <data name="Menu_Plans" xml:space="preserve">
+    <value>Planes</value>
+  </data>
+  <data name="Menu_Security" xml:space="preserve">
+    <value>Seguridad</value>
+  </data>
+  <data name="Menu_Service" xml:space="preserve">
+    <value>_Servicio</value>
+  </data>
+  <data name="Menu_Services" xml:space="preserve">
+    <value>Servicios</value>
+  </data>
+  <data name="Menu_Service_Group" xml:space="preserve">
+    <value>Grupo de servicio</value>
+  </data>
+  <data name="Menu_Service_List" xml:space="preserve">
+    <value>Listas de servicios</value>
+  </data>
+  <data name="Menu_Sites" xml:space="preserve">
+    <value>Sitios</value>
+  </data>
+  <data name="Menu_Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Menu_Type" xml:space="preserve">
+    <value>Escribe</value>
+  </data>
+  <data name="Menu_Utilities" xml:space="preserve">
+    <value>_Utilidades</value>
+  </data>
+  <data name="Menu_Vertical_Scroll" xml:space="preserve">
+    <value>Barras de desplazamiento verticales</value>
+  </data>
+  <data name="Menu_View" xml:space="preserve">
+    <value>_Vista</value>
+  </data>
+  <data name="Menu_Windows" xml:space="preserve">
+    <value>Ventanas</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Mensajes</value>
+  </data>
+  <data name="Network_Elements" xml:space="preserve">
+    <value>Elementos de red</value>
+  </data>
+  <data name="Network_Status" xml:space="preserve">
+    <value>Estado de la red</value>
+  </data>
+  <data name="New_Password" xml:space="preserve">
+    <value>Nueva contraseña *</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Nota</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>_Notas</value>
+  </data>
+  <data name="Note_Require" xml:space="preserve">
+    <value>Nota *</value>
+  </data>
+  <data name="Not_Match_Password" xml:space="preserve">
+    <value>La contraseña no coincide.</value>
+  </data>
+  <data name="Not_Register_User" xml:space="preserve">
+    <value>No es un usuario registrado del proveedor de servicios.</value>
+  </data>
+  <data name="No_Internet" xml:space="preserve">
+    <value>Sin internet.</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Old_Password" xml:space="preserve">
+    <value>Contraseña anterior *</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>_Pedidos</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Clave</value>
+  </data>
+  <data name="Payment_Methods" xml:space="preserve">
+    <value>_Métodos de pago</value>
+  </data>
+  <data name="Plan" xml:space="preserve">
+    <value>Plan</value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>Prioridad</value>
+  </data>
+  <data name="Reset_Factory_Default" xml:space="preserve">
+    <value>¿Estás segura de restablecer el tamaño?</value>
+  </data>
+  <data name="Reset_Size" xml:space="preserve">
+    <value>Restablecer cambio de tamaño del panel</value>
+  </data>
+  <data name="Restart_Application" xml:space="preserve">
+    <value>¿Se reiniciará ahora para cambiar el idioma?</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Ahorrar</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Búsqueda</value>
+  </data>
+  <data name="Select_Language" xml:space="preserve">
+    <value>Seleccione el idioma</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Servicio</value>
+  </data>
+  <data name="ServiceType" xml:space="preserve">
+    <value>Tipo de servicio</value>
+  </data>
+  <data name="Sites" xml:space="preserve">
+    <value>Sitios</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Española</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Status_Counts" xml:space="preserve">
+    <value>Recuentos de estado</value>
+  </data>
+  <data name="Suggestion_Password" xml:space="preserve">
+    <value>¿Quieres usar esta contraseña?</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Tareas</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>_Actas</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="Unknown_Error" xml:space="preserve">
+    <value>Error desconocido</value>
+  </data>
+  <data name="User_Id" xml:space="preserve">
+    <value>Id de usuario</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+</root>

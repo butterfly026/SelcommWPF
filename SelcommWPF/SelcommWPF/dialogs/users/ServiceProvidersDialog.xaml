@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="SelcommWPF.dialogs.users.ServiceProvidersDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SelcommWPF.dialogs.users"
+             xmlns:p="clr-namespace:SelcommWPF.Properties"
+             xmlns:ctr="clr-namespace:SelcommWPF.controls" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="ItemStyle" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignGridViewItem}">
+            <EventSetter Event="MouseDoubleClick" Handler="ListItem_DoubleClick" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <materialDesign:Card Width="900" MinHeight="500" MaxHeight="500" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="LabelDialogTitle" Content="{x:Static p:Resources1.Service_Provider_User}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Grid.Row="0"/>
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <materialDesign:PackIcon Kind="Magnify" VerticalAlignment="Center" Margin="10" />
+                        <TextBox x:Name="TextSearch" Width="200" VerticalContentAlignment="Center" FontSize="15" materialDesign:TextFieldAssist.HasClearButton="True" 
+                                 TextChanged="TextSearch_TextChanged" materialDesign:HintAssist.Hint="{x:Static p:Resources.Search}"/>
+                    </StackPanel>
+                    <Button Grid.Column="1" Margin="20,0,20,0" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignPaperLightButton}" Click="ButtonAdd_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <Label Content="{x:Static p:Resources.Add}" FontSize="16" Padding="0"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Border Grid.Row="2" Margin="0,10,0,0" BorderBrush="#ddd" BorderThickness="1">
+                    <ListView x:Name="ListUsers" Tag="0" ScrollViewer.ScrollChanged="ListUsers_ScrollChanged" ItemContainerStyle="{StaticResource ItemStyle}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Id}" Width="100">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources.User_Id}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Name}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources.Name}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Email}" Width="200">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources.Email}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding RolesText}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources1.Role}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Status}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources.Status}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
+                <StackPanel x:Name="PanelCharges" Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" Margin="5">
+                    <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                            Margin="10,5" Click="ButtonClose_Click"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:DialogHost HorizontalAlignment="Center" VerticalAlignment="Center" Identifier="DetailDialog">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel />
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" />
+        </Grid>
+    </Grid>
+</UserControl>

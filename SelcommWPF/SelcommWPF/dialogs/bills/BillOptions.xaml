@@ -1,0 +1,190 @@
+﻿<UserControl x:Class="SelcommWPF.dialogs.bills.BillOptions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:SelcommWPF.Properties"
+             xmlns:ctr="clr-namespace:SelcommWPF.controls" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" >
+    <Grid>
+        <materialDesign:Card Width="600" Height="800" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="LabelDialogTitle" Content="{x:Static p:Resources.Bill_Options}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
+                <ScrollViewer Grid.Row="1" x:Name="ScrollBillOption">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="{x:Static p:Resources.General}" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="10"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox x:Name="ComboBillFormat" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Bill_Format}" Grid.Column="0"
+                                      FontSize="16" Margin="10" SelectionChanged="ComboBillFormat_SelectionChanged"/>
+                            <Button x:Name="ButtonBillFormat" Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10"
+                                    Click="ButtonBillFormat_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="{x:Static p:Resources.Provide_Paper_Bill}" FontSize="16" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="10"/>
+                                <ToggleButton x:Name="TogglePaperBill" Grid.Column="1" Grid.Row="0" Margin="10" Checked="TogglePaperBill_Checked" Unchecked="TogglePaperBill_Checked"/>
+                                <Label Content="{x:Static p:Resources.Provide_Email_Bill}" FontSize="16" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="10"/>
+                                <ToggleButton x:Name="ToggleEmailBill" Grid.Column="1" Grid.Row="1" Margin="10" Checked="TogglePaperBill_Checked" Unchecked="TogglePaperBill_Checked"/>
+                            </Grid>
+                            <Button x:Name="ButtonPaperEmail" Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10" 
+                                    IsEnabled="False" Click="ButtonPaperEmail_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="{x:Static p:Resources.Provide_Excel_Bill}" FontSize="16" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="10"/>
+                                <ToggleButton x:Name="ToggleExcelBill" Grid.Column="1" Grid.Row="0" Margin="10" Unchecked="ToggleExcelBill_Unchecked" Checked="ToggleExcelBill_Unchecked"/>
+                            </Grid>
+                            <Button x:Name="ButtonExcelBill" Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10" 
+                                    IsEnabled="False" Click="ButtonExcelBill_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="10" Orientation="Horizontal">
+                                <Label Content="{x:Static p:Resources.Return_Bill}" FontSize="16" VerticalAlignment="Center"/>
+                                <Label Content=":" FontSize="16" VerticalAlignment="Center"/>
+                                <Label x:Name="LabelReturnBill" Content="" FontSize="16" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10"
+                                    Click="ButtonReturnBill_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="{x:Static p:Resources.Proofing_Account}" FontSize="16" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="10"/>
+                                <ToggleButton x:Name="ToggleProofing" Grid.Column="1" Grid.Row="0" Margin="10" Checked="ToggleProofing_Checked" Unchecked="ToggleProofing_Checked"/>
+                            </Grid>
+                            <Button Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10" Visibility="Hidden"/>
+                        </Grid>
+                        <Label Content="{x:Static p:Resources.Billing_Control}" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="10"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="10" Orientation="Horizontal">
+                                <Label Content="{x:Static p:Resources.Bill_Cycle}" FontSize="16" VerticalAlignment="Center"/>
+                                <Label Content=":" FontSize="16" VerticalAlignment="Center"/>
+                                <Label x:Name="LabelBillCycle" Content="" FontSize="16" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10" Click="ButtonBillCycle_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox x:Name="ComboInvoiceInterval" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Invoice_Interval}" 
+                                      Grid.Column="0" FontSize="16" Margin="10" SelectionChanged="ComboInvoiceInterval_SelectionChanged"/>
+                            <Button x:Name="ButtonInvoiceInterval" Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10"
+                                    Click="ButtonInvoiceInterval_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="10" Orientation="Horizontal">
+                                <Label Content="{x:Static p:Resources.Exclusion}" FontSize="16" VerticalAlignment="Center"/>
+                                <Label Content=":" FontSize="16" VerticalAlignment="Center"/>
+                                <Label x:Name="LabelExclusion" Content="" FontSize="16" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10" Click="ButtonExclusion_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="10" Orientation="Horizontal">
+                                <Label Content="{x:Static p:Resources.Term}" FontSize="16" VerticalAlignment="Center"/>
+                                <Label Content=":" FontSize="16" VerticalAlignment="Center"/>
+                                <Label x:Name="LabelTerm" Content="" FontSize="16" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10" Click="ButtonTerms_Click"/>
+                        </Grid>
+                        <Label Content="{x:Static p:Resources.Currency_Taxation}" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="10"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox x:Name="ComboCurrency" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Currency}" 
+                                      Grid.Column="0" FontSize="16" Margin="10" SelectionChanged="ComboCurrency_SelectionChanged"/>
+                            <Button x:Name="ButtonCurrency" Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox x:Name="ComboTaxation" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Taxation}" 
+                                      Grid.Column="0" FontSize="16" Margin="10" SelectionChanged="ComboTaxation_SelectionChanged"/>
+                            <Button x:Name="ButtonTaxation" Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox x:Name="ComboExemptions" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="{x:Static p:Resources.Exemptions}" 
+                                      Grid.Column="0" FontSize="16" Margin="10" SelectionChanged="ComboExemptions_SelectionChanged"/>
+                            <Button x:Name="ButtonExemptions" Content="{x:Static p:Resources.Update}" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="30,10"
+                                    Click="ButtonExemptions_Click"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="10">
+                    <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10" Click="ButtonClose_Click"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:DialogHost HorizontalAlignment="Center" VerticalAlignment="Center" Identifier="DetailDialog">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel />
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="SelcommWPF.dialogs.contacts.AliasesHistory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:SelcommWPF.Properties"
+             xmlns:ctr="clr-namespace:SelcommWPF.controls" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <Grid>
+        <materialDesign:Card Width="900" MinHeight="500" MaxHeight="500" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="LabelTitle" Content="" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Grid.Row="0"/>
+                <ListView x:Name="ListAliasesHistory" Grid.Row="1" Margin="0,10,0,0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.Id}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding TypeCode}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.Type_Code}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Type}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.Type}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Alias}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.Alias}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding FromDateTime}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.From_Date_Time}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding ToDateTime}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.To_Date_Time}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding CreatedBy}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.Created_By}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Created}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.Created}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView x:Name="ListNamessHistory" Grid.Row="1" Margin="0,10,0,0" Visibility="Collapsed">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.Id}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding OldDetails}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.Old_Details}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding CreatedBy}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.Created_By}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Created}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Content="{x:Static p:Resources.Created}" FontWeight="Bold" Padding="10,5" HorizontalContentAlignment="Center"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="5">
+                    <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                            Margin="10,5" Click="ButtonClose_Click"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" />
+        </Grid>
+    </Grid>
+</UserControl>

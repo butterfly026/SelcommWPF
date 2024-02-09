@@ -1,0 +1,168 @@
+﻿<UserControl x:Class="SelcommWPF.dialogs.trans.ReceiptDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:SelcommWPF.Properties"
+             xmlns:ctr="clr-namespace:SelcommWPF.controls" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <Grid>
+        <materialDesign:Card Width="900" Height="700" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="LabelDialogTitle" Content="{x:Static p:Resources.Receipt}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Grid.Row="0"/>
+                <ScrollViewer x:Name="ScrollReceipt" Grid.Row="1">
+                    <TabControl HorizontalContentAlignment="Left" materialDesign:ColorZoneAssist.Mode="SecondaryMid" SelectionChanged="TabControl_SelectionChanged">
+                        <TabItem Header="{x:Static p:Resources.Receipt}">
+                            <StackPanel Orientation="Vertical">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="TextNumber" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Number}" materialDesign:HintAssist.IsFloating="True"
+                                             Grid.Row="0" Grid.Column="0" IsEnabled="False" Margin="10"/>
+                                    <TextBox x:Name="TextAmount" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Amount_AUD}" materialDesign:HintAssist.IsFloating="True"
+                                             Grid.Row="0" Grid.Column="1" Margin="10" PreviewTextInput="TextAmount_PreviewTextInput" TextChanged="TextAmount_TextChanged"/>
+                                    <DatePicker x:Name="DatePickerReceipt" materialDesign:HintAssist.Hint="{x:Static p:Resources.Date}" Grid.Column="0" Grid.Row="1"
+                                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontSize="16" Margin="10"/>
+                                    <TextBox x:Name="TextReference" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Reference}" materialDesign:HintAssist.IsFloating="True"
+                                             Grid.Row="1" Grid.Column="1" Margin="10"/>
+                                    <TextBox x:Name="TextSurcharge" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Surcharge}" materialDesign:HintAssist.IsFloating="True" 
+                                             Grid.Row="2" Grid.Column="0" Margin="10" IsEnabled="False" Visibility="Collapsed"  PreviewTextInput="TextAmount_PreviewTextInput" 
+                                             TextChanged="TextAmount_TextChanged"/>
+                                    <Label x:Name="LabelTotalAmount" Content="{x:Static p:Resources.Allocated_Amount}" FontWeight="Bold" FontSize="16" Grid.Row="2" VerticalAlignment="Center" 
+                                           Grid.Column="1" HorizontalAlignment="Right" Visibility="Collapsed" Margin="0,0,20,0"/>
+                                    <CheckBox x:Name="CheckDocument" Grid.Row="3" Grid.Column="0" Margin="10" Content="{x:Static p:Resources.Create_Document}" FontSize="16" 
+                                              VerticalContentAlignment="Bottom" Padding="5,0,0,0"/>
+                                    <CheckBox x:Name="CheckEmail" Grid.Row="3" Grid.Column="1" Margin="10" Content="{x:Static p:Resources.Email}" FontSize="16" 
+                                              VerticalContentAlignment="Bottom" Padding="5,0,0,0"/>
+                                </Grid>
+                                <Label Content="{x:Static p:Resources.Payment_Methods}" FontSize="18" Margin="10"/>
+                                <TabControl HorizontalContentAlignment="Left" materialDesign:ColorZoneAssist.Mode="SecondaryMid" Margin="20,0">
+                                    <TabItem Header="{x:Static p:Resources.Credit_Card}">
+                                        <WrapPanel x:Name="PanelCreditCard" Orientation="Horizontal" HorizontalAlignment="Center"/>
+                                    </TabItem>
+                                    <TabItem Header="{x:Static p:Resources.Cash}">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBox x:Name="TextCash" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Cash}" materialDesign:HintAssist.IsFloating="True" 
+                                                     Grid.Row="1" Grid.Column="1" Margin="10" PreviewTextInput="TextAmount_PreviewTextInput" TextChanged="TextAmount_TextChanged"/>
+                                            <TextBox x:Name="TextCheque" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Cheque}" materialDesign:HintAssist.IsFloating="True" 
+                                                     Grid.Row="1" Grid.Column="1" Margin="10" PreviewTextInput="TextAmount_PreviewTextInput" TextChanged="TextAmount_TextChanged"/>
+                                            <TextBox x:Name="TextChequeNumber" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Chegue_Number}" 
+                                                     materialDesign:HintAssist.IsFloating="True" Grid.Row="1" Grid.Column="1" Margin="10" Visibility="Collapsed"/>
+                                            <TextBox x:Name="TextBSB" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.BSB}" materialDesign:HintAssist.IsFloating="True" 
+                                                     Grid.Row="1" Grid.Column="1" Margin="10" Visibility="Collapsed"/>
+                                        </StackPanel>
+                                    </TabItem>
+                                </TabControl>
+                                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                                    <Button Content="{x:Static p:Resources.Add_Credit_Card}" Width="160" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10,5"
+                                            Click="ButtonAddCreditCard_Click"/>
+                                    <Button Content="{x:Static p:Resources.Add_Bank_Account}" Width="160" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10,5"
+                                            Click="ButtonAddBank_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </TabItem>
+                        <TabItem Header="{x:Static p:Resources.Allocation}">
+                            <StackPanel Orientation="Vertical">
+                                <CheckBox x:Name="CheckAutoAllocation" Grid.Row="3" Grid.Column="1" Margin="10" Content="{x:Static p:Resources.Auto_Allocation}" FontSize="16"
+                                          VerticalContentAlignment="Bottom" Padding="5,0,0,0" Checked="CheckAutoAllocation_Checked" Unchecked="CheckAutoAllocation_Checked"/>
+                                <StackPanel x:Name="PanelAllocation" Orientation="Vertical" Visibility="Collapsed">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="10">
+                                            <Label Content="{x:Static p:Resources.Total_Amount_Allocate}" FontSize="16"/>
+                                            <Label Content=" : " FontSize="16"/>
+                                            <Label x:Name="LabelTAmountAllocate" Content="" FontSize="16"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="10">
+                                            <Label Content="{x:Static p:Resources.Remaining_Amount_Allocate}" FontSize="16"/>
+                                            <Label Content=" : " FontSize="16"/>
+                                            <Label x:Name="LabelRAmountAllocate" Content="" FontSize="16"/>
+                                        </StackPanel>
+                                        <CheckBox x:Name="CheckShowZero" Grid.Row="1" Grid.Column="0" Margin="10" Content="{x:Static p:Resources.Show_Zero_Balance}" FontSize="16"
+                                          VerticalContentAlignment="Bottom" Padding="5,0,0,0" Checked="CheckShowZero_Checked" Unchecked="CheckShowZero_Checked"/>
+                                        <CheckBox x:Name="CheckBestMatch" Grid.Row="1" Grid.Column="1" Margin="10" Content="{x:Static p:Resources.Best_Match}" FontSize="16"
+                                          VerticalContentAlignment="Bottom" Padding="5,0,0,0" Checked="CheckBestMatch_Checked" Unchecked="CheckBestMatch_Checked"/>
+                                    </Grid>
+                                    <Label Margin="20,10,10,0" Content="{x:Static p:Resources.Allocation}" FontSize="16"/>
+                                    <ListView x:Name="ListAllocations" Margin="20,0,20,0" Height="300">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn>
+                                                    <GridViewColumn.Header>
+                                                        <GridViewColumnHeader Content="{x:Static p:Resources.Allocated_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                    </GridViewColumn.Header>
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBox Text="{Binding AllocateAmountText}" HorizontalContentAlignment="Right" Width="100" Tag="{Binding Id}"
+                                                                     PreviewTextInput="TextAmount_PreviewTextInput" TextChanged="TextAmount_TextChanged"/>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn DisplayMemberBinding="{Binding Number}">
+                                                    <GridViewColumn.Header>
+                                                        <GridViewColumnHeader Content="{x:Static p:Resources.Fin_Number}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                    </GridViewColumn.Header>
+                                                </GridViewColumn>
+                                                <GridViewColumn DisplayMemberBinding="{Binding OpenAmountText}">
+                                                    <GridViewColumn.Header>
+                                                        <GridViewColumnHeader Content="{x:Static p:Resources.Open_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                    </GridViewColumn.Header>
+                                                </GridViewColumn>
+                                                <GridViewColumn DisplayMemberBinding="{Binding Type}">
+                                                    <GridViewColumn.Header>
+                                                        <GridViewColumnHeader Content="{x:Static p:Resources.Type}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                    </GridViewColumn.Header>
+                                                </GridViewColumn>
+                                                <GridViewColumn DisplayMemberBinding="{Binding AmountText}">
+                                                    <GridViewColumn.Header>
+                                                        <GridViewColumnHeader Content="{x:Static p:Resources.Original_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                    </GridViewColumn.Header>
+                                                </GridViewColumn>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                    <Button Content="{x:Static p:Resources.Clear_Allocation}" Width="160" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10"
+                                            Click="ButtonClear_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </TabItem>
+                    </TabControl>
+                </ScrollViewer>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                    <Button x:Name="ButtonSave" Content="{x:Static p:Resources.Save}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10" Click="ButtonSave_Click"
+                            IsEnabled="False"/>
+                    <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" Margin="10" Click="ButtonClose_Click"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:DialogHost HorizontalAlignment="Center" VerticalAlignment="Center" Identifier="DetailDialog">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel />
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" />
+        </Grid>
+    </Grid>
+</UserControl>

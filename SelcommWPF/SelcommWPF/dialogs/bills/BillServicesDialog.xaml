@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="SelcommWPF.dialogs.bills.BillServicesDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:SelcommWPF.Properties"
+             xmlns:ctr="clr-namespace:SelcommWPF.controls" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <Grid>
+        <materialDesign:Card Width="900" MinHeight="500" MaxHeight="500" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="LabelDialogTitle" Content="" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Grid.Row="0"/>
+                <Grid Grid.Row="1" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
+                        <materialDesign:PackIcon Kind="Magnify" VerticalAlignment="Center" Margin="10" />
+                        <TextBox x:Name="TextServiceSearch" Width="200" VerticalContentAlignment="Center" FontSize="15" 
+                                 materialDesign:TextFieldAssist.HasClearButton="True" TextChanged="TextServiceSearch_TextChanged" 
+                                 materialDesign:HintAssist.Hint="{x:Static p:Resources.Search}"/>
+                    </StackPanel>
+                    <ListView x:Name="ListBillServices" Grid.Row="1" Margin="0,10,0,0" ScrollViewer.ScrollChanged="ListBillServices_Scroll" Tag="0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding ServiceTypeCode}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources.Service_Type}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding ServiceReference}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources.Service_Reference}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding ServiceId}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources.Service_Id}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources.Charge_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding ChargeAmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources.Charge_Amount_Inc}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding ChargeAmountIncText}" HorizontalContentAlignment="Right" Width="80"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources.Usage_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding UsageAmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="{x:Static p:Resources.Usage_Amount_Inc}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                    </GridViewColumn.Header>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding UsageAmountIncText}" HorizontalContentAlignment="Right" Width="80"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel x:Name="PanelCharges" Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="5">
+                        <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                                Margin="10,5" Click="ButtonClose_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" />
+        </Grid>
+    </Grid>
+</UserControl>

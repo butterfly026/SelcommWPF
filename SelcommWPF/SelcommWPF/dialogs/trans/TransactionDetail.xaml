@@ -1,0 +1,523 @@
+﻿<UserControl x:Class="SelcommWPF.dialogs.TransactionDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:SelcommWPF.Properties"
+             xmlns:ctr="clr-namespace:SelcommWPF.controls" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <Grid>
+        <materialDesign:Card Width="1000" Height="700" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="LabelDialogTitle" Content="" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Grid.Row="0"/>
+                <StackPanel x:Name="PanelDetail" Orientation="Vertical" Grid.Row="1" Margin="0,10,0,0" Visibility="Collapsed">
+                    <Label x:Name="LabelType" FontSize="16" HorizontalAlignment="Center" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="LabelNumber" FontSize="16" Grid.Row="0" Grid.Column="0"/>
+                        <Label x:Name="LabelAmount" FontSize="16" Grid.Row="0" Grid.Column="1"/>
+                        <Label x:Name="LabelTaxAmount" FontSize="16" Grid.Row="0" Grid.Column="2"/>
+                        <Label x:Name="LabelOpenAmount" FontSize="16" Grid.Row="1" Grid.Column="0"/>
+                        <Label x:Name="LabelDate" FontSize="16" Grid.Row="1" Grid.Column="1"/>
+                        <Label x:Name="LabelDueDate" FontSize="16" Grid.Row="1" Grid.Column="2"/>
+                        <Label x:Name="LabelCategory" FontSize="16" Grid.Row="2" Grid.Column="0"/>
+                        <Label x:Name="Labelstatus" FontSize="16" Grid.Row="2" Grid.Column="1"/>
+                        <Label x:Name="LabelSource" FontSize="16" Grid.Row="2" Grid.Column="2"/>
+                        <Label x:Name="LabelReason" FontSize="16" Grid.Row="3" Grid.Column="0"/>
+                        <Label x:Name="LabelReference" FontSize="16" Grid.Row="3" Grid.Column="1"/>
+                        <Label x:Name="LabelBillNumber" FontSize="16" Grid.Row="3" Grid.Column="2"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                            <Label FontSize="16" Content="{x:Static p:Resources.Created}" Foreground="#077397"/>
+                            <Label FontSize="16" Content=" : " Foreground="#077397"/>
+                            <Label x:Name="LabelCreated" FontSize="16" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                            <Label FontSize="16" Content="{x:Static p:Resources.Created_By}" Foreground="#077397"/>
+                            <Label FontSize="16" Content=" : " Foreground="#077397"/>
+                            <Label x:Name="LabelCreatedBy" FontSize="16"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                            <Label FontSize="16" Content="{x:Static p:Resources.Updated}" Foreground="#077397"/>
+                            <Label FontSize="16" Content=" : " Foreground="#077397"/>
+                            <Label x:Name="LabelUpdated" FontSize="16" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                            <Label FontSize="16" Content="{x:Static p:Resources.Updated_By}" Foreground="#077397"/>
+                            <Label FontSize="16" Content=" : " Foreground="#077397"/>
+                            <Label x:Name="LabelUpdatedBy" FontSize="16"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+                <TabControl  Grid.Row="2" Margin="0,10,0,0" HorizontalContentAlignment="Left" materialDesign:ColorZoneAssist.Mode="SecondaryMid" >
+                    <TabItem Header="{x:Static p:Resources.Note}">
+                        
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Allocations}">
+                        <ListView x:Name="ListAllocations">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Id}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Number}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Number}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Date}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Date}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding AssignmentDirection}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Assignment_Direction}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Open_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding OpenAmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Allocated_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding AllocatedAmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Type}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Type}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Status}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Status}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Source}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Source}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Category}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Category}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding AmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Tax_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding TaxAmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding OtherReference}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Other_Reference}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding CreatedBy}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Created_By}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Created}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Created}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding LastUpdated}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Last_Updated}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding UpdatedBy}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Updated_By}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Distributions}">
+                        <ListView x:Name="ListDisturibution">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Id}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding AccountCode}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Account_Code}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding AccountName}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Account_Name}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Period}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Period}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding AmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Tax_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding TaxAmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Adjusted_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding AdjustedAmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding From}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.From}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding To}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.To}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Sign}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Sign}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Comment}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Comment}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Control}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Control}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Adjusted_Daily_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding AdjustedDailyAmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding ServiceTypeCode}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Service_Type_Code}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding ServiceReference}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Service_Reference}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding ServiceId}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Service_Id}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Created}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Created}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding CreatedBy}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Created_By}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Events}">
+                        <ListView x:Name="ListEvent">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Id}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Description}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Description}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Created}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Created}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding CreatedBy}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Created_By}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.Pay_Request}">
+                        <ListView x:Name="ListPayRequest">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Id}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding TypeId}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Type_Id}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding SourceId}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Source_Id}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding AmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Tax_Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding TaxAmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding ProviderId}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Provider_Id}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Provider}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Provider}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Date}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Date}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Status}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Status}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding ReasonId}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Reason_Id}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Reason}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Reason}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding SettlementDate}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Settlement_Date}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.External_Transactions}">
+                        <ListView x:Name="ListExternal">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Id}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding StatusId}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Status_Id}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Status}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Status}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Amount}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding AmountText}" HorizontalContentAlignment="Right" Width="80"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Reference}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Reference}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding DebtorCode}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Debtor_Code}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding OriginalReference}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Original_Reference}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding OriginalDate}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Original_Date}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding PayerID}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Payer_ID}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding SettlementDate}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Settlement_Date}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding AdditionalInformation}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Additional_Information}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Created}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Created}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding CreatedBy}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Created_By}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Updated}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Updated}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding UpdatedBy}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Content="{x:Static p:Resources.Updated_By}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </TabItem>
+                </TabControl>
+                <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" Margin="5">
+                    <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                            Margin="10,5" Click="ButtonClose_Click"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:DialogHost HorizontalAlignment="Center" VerticalAlignment="Center" Identifier="DetailDialog">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel />
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" />
+        </Grid>
+    </Grid>
+</UserControl>

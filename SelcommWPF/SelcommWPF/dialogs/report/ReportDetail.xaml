@@ -1,0 +1,162 @@
+﻿<UserControl x:Class="SelcommWPF.dialogs.report.ReportDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:SelcommWPF.Properties"
+             xmlns:ctr="clr-namespace:SelcommWPF.controls" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <Grid>
+        <materialDesign:Card Width="900" Height="600" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="LabelDialogTitle" Content="" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Grid.Row="0"/>
+                <Grid Grid.Row="1" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TabControl Grid.Row="0" HorizontalContentAlignment="Left" materialDesign:ColorZoneAssist.Mode="SecondaryMid">
+                        <TabItem Header="Instances">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <ListView x:Name="ListReportInstances" ScrollViewer.ScrollChanged="ListReportDetail_ScrollChanged" Tag="0" Grid.Row="0"
+                                          SelectionChanged="ListReportInstances_SelectionChanged">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Request_ID}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Name}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Status}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Status}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding StatusDateTime}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Status_DateTime}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding EmailsText}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Emails}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="10">
+                                    <Button x:Name="ButtonInstanceView" Content="{x:Static p:Resources.View_Arguments}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}"
+                                            Click="ButtonArgument_Click" Tag="1" IsEnabled="False"/>
+                                    <Button x:Name="ButtonInstanceDownload" Content="{x:Static p:Resources.Download}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}"  Margin="10,0,10,0"
+                                            Click="ButtonDownload_Click" IsEnabled="False"/>
+                                    <Button x:Name="ButtonInstanceDelete" Content="{x:Static p:Resources.Delete}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                                            Click="ButtonDelete_Click" Tag="1" IsEnabled="False"/>
+                                    <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                                            Click="ButtonClose_Click"  Margin="10,0,0,0" Tag="DetailDialog"/>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Schedule">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <ListView x:Name="ListReportSchedule" ScrollViewer.ScrollChanged="ListReportDetail_ScrollChanged" Tag="0"
+                                          SelectionChanged="ListReportSchedule_SelectionChanged">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Request_ID}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Name}" FontWeight="Bold" Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Schedule}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Schedule}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding From}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.From}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding To}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.To}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Comments}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Comments}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding EmailsText}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Emails}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Created}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Created}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding CreatedBy}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Created_By}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn DisplayMemberBinding="{Binding ScheduleText}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Content="{x:Static p:Resources.Schedule_Text}" FontWeight="Bold"  Padding="5" HorizontalContentAlignment="Center"/>
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="10">
+                                    <Button x:Name="ButtonScheduleEnd" Content="End" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                                            Click="ButtonEnd_Click" IsEnabled="False"/>
+                                    <Button x:Name="ButtonScheduleView" Content="View Arguments" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                                            Margin="10,0,10,0" Click="ButtonArgument_Click" Tag="2" IsEnabled="False"/>
+                                    <Button x:Name="ButtonScheduleDelete" Content="{x:Static p:Resources.Delete}" Width="130" Click="ButtonDelete_Click" Tag="2"
+                                            Style="{StaticResource MaterialDesignPaperLightButton}" IsEnabled="False"/>
+                                    <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                                            Click="ButtonClose_Click"  Margin="10,0,0,0" Tag="DetailDialog"/>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:DialogHost HorizontalAlignment="Center" VerticalAlignment="Center" Identifier="ArgumentDialog">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel />
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" />
+        </Grid>
+    </Grid>
+</UserControl>

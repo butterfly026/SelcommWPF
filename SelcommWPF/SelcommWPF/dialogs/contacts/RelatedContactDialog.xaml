@@ -1,0 +1,171 @@
+﻿<UserControl x:Class="SelcommWPF.dialogs.contacts.RelatedContactDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:SelcommWPF.Properties"
+             xmlns:ctr="clr-namespace:SelcommWPF.controls" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <Grid>
+        <materialDesign:Card Width="900" Padding="20">
+            <ScrollViewer>
+                <Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="LabelDialogTitle" Content="" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Grid.Row="0"/>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="TextFamilyName" VerticalContentAlignment="Center" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Family_Name}" 
+                                     Grid.Row="1"  Grid.Column="0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10"
+                                     TextChanged="TextFamilyName_TextChanged"/>
+                            <TextBox x:Name="TextFirstName" VerticalContentAlignment="Center" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.First_Name1}" 
+                                     Grid.Row="1"  Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10"/>
+                            <ComboBox x:Name="ComboTitle" materialDesign:HintAssist.IsFloating="True" Grid.Column="0" Grid.Row="2" FontSize="16" 
+                                      materialDesign:HintAssist.Hint="{x:Static p:Resources.Title1}" Margin="10"/>
+                            <DatePicker x:Name="DatePickerBirth" materialDesign:HintAssist.Hint="{x:Static p:Resources.Date_of_Birth}" Margin="10"
+                                        materialDesign:TextFieldAssist.HasClearButton="True"  Grid.Column="1" Grid.Row="2"
+                                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontSize="16"/>
+                            <ComboBox x:Name="ComboGender" materialDesign:HintAssist.IsFloating="True" Grid.Column="0" Grid.Row="3" FontSize="16" 
+                                      materialDesign:HintAssist.Hint="{x:Static p:Resources.Gender}" Margin="10"/>
+                            <TextBox x:Name="TextTimeZone" VerticalContentAlignment="Center" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Time_Zone}" 
+                                     Grid.Row="3" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10" Visibility="Collapsed"/>
+                        </Grid>
+                        <StackPanel Orientation="Vertical" Grid.Row="2">
+                            <Label Content="{x:Static p:Resources.RelationShip_Type}" FontSize="16" Margin="10"/>
+                            <StackPanel x:Name="PanelRelationShip" Orientation="Vertical" Margin="20,-10,10,10"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10">
+                                    <TextBox x:Name="TextMobile" VerticalContentAlignment="Center" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Contact_Phone}" 
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" LostFocus="TextPhoneOrEmail_LostFocus" 
+                                             Tag="Contact Phone" TextChanged="TextMobile_TextChanged"/>
+                                    <ProgressBar x:Name="ProgressMobile" IsIndeterminate="True" Visibility="Collapsed"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10">
+                                    <TextBox x:Name="TextEmail" VerticalContentAlignment="Center" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Email}" 
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" LostFocus="TextPhoneOrEmail_LostFocus" 
+                                             Tag="Email Address" TextChanged="TextEmail_TextChanged"/>
+                                    <ProgressBar x:Name="ProgressEmail" IsIndeterminate="True" Visibility="Collapsed"/>
+                                </StackPanel>
+                            </Grid>
+                            <CheckBox x:Name="CheckAuthenticate" Content="{x:Static p:Resources.Check_Contact_Auth}" FontSize="16" VerticalContentAlignment="Bottom" 
+                                  Margin="10" Checked="CheckAuthenticate_Checked" Unchecked="CheckAuthenticate_Checked"/>
+                            <Grid x:Name="GridAuthenticate" Visibility="Collapsed">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0"  Grid.Column="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Vertical" Margin="10" Grid.Column="0">
+                                        <TextBox x:Name="TextLoginMobile" VerticalContentAlignment="Center" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Mobile}" 
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" LostFocus="TextPhoneOrEmail_LostFocus"
+                                                 Tag="Authenticate Mobile"/>
+                                        <ProgressBar x:Name="ProgressLoginMobile" IsIndeterminate="True" Visibility="Collapsed"/>
+                                    </StackPanel>
+                                    <Button Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Content="Check" Margin="10"
+                                            Click="ButtonCheck_Click" Tag="Mobile"/>
+                                </Grid>
+                                <Grid Grid.Row="0"  Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Vertical" Margin="10" Grid.Column="0">
+                                        <TextBox x:Name="TextLoginEmail" VerticalContentAlignment="Center" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Email}" 
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" LostFocus="TextPhoneOrEmail_LostFocus"
+                                                 Tag="Authenticate Email"/>
+                                        <ProgressBar x:Name="ProgressLoginEmail" IsIndeterminate="True" Visibility="Collapsed"/>
+                                    </StackPanel>
+                                    <Button Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Content="Check" Margin="10"
+                                             Click="ButtonCheck_Click" Tag="Email"/>
+                                </Grid>
+                                <Grid Grid.Row="1"  Grid.Column="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Vertical" Margin="10" Grid.Column="0">
+                                        <TextBox x:Name="TextLoginId" VerticalContentAlignment="Center" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Login}" 
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                                        <ProgressBar x:Name="ProgressLoginId" IsIndeterminate="True" Visibility="Collapsed"/>
+                                    </StackPanel>
+                                    <Button Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}" Content="Check" Margin="10"
+                                             Click="ButtonCheck_Click" Tag="Login"/>
+                                </Grid>
+                                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="10">
+                                    <ToggleButton x:Name="ToggleChangePassword"/>
+                                    <Label Content="{x:Static p:Resources.Change_Password_First}" FontSize="16" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Grid Grid.Row="1" Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Vertical" Margin="10">
+                                        <PasswordBox x:Name="TextPassword" FontSize="16" materialDesign:HintAssist.Hint="{x:Static p:Resources.Password}" 
+                                                     Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" 
+                                                     LostFocus="TextPassword_LostFocus"/>
+                                        <ProgressBar x:Name="ProgressComplex" IsIndeterminate="True" Visibility="Collapsed"/>
+                                        <Border x:Name="BorderComplex" Background="#dc3545" CornerRadius="3" Visibility="Collapsed">
+                                            <Label x:Name="LabelComplex" Content="{x:Static p:Resources.Password_Strength}" Padding="2" HorizontalContentAlignment="Center" 
+                                                   Foreground="White"/>
+                                        </Border>
+                                    </StackPanel>
+                                    <Button Grid.Column="1" Background="Transparent" Foreground="Black" Padding="5,0" BorderThickness="0" Margin="10"
+                                            Click="Suggestion_Password_Click">
+                                        <materialDesign:PackIcon Kind="KeyVariant" Width="20" Height="20"/>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" Margin="0,10,0,0">
+                            <Button x:Name="ButtonSave" Content="{x:Static p:Resources.Save}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                                    Margin="10,5" Click="ButtonSave_Click" Tag="MyDialogHost" IsEnabled="False"/>
+                            <Button Content="{x:Static p:Resources.Close}" Width="130" Style="{StaticResource MaterialDesignPaperLightButton}" 
+                                    Margin="10,5" Click="ButtonClose_Click" Tag="MyDialogHost"/>
+                        </StackPanel>
+                    </Grid>
+                    <materialDesign:Card x:Name="PanelTimeZone" VerticalAlignment="Top" HorizontalAlignment="Right" Width="410" Height="150" Margin="0,295,10,0"
+                                     Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical">
+                            <ProgressBar x:Name="ProgressTimeZone" IsIndeterminate="True" Visibility="Collapsed"/>
+                            <ListView x:Name="ListTimeZone" Height="146" Visibility="Collapsed"/>
+                        </StackPanel>
+                    </materialDesign:Card>
+                </Grid>
+            </ScrollViewer>
+        </materialDesign:Card>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" />
+        </Grid>
+    </Grid>
+</UserControl>

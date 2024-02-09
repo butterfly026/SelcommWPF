@@ -1,0 +1,62 @@
+﻿<Window x:Class="SelcommWPF.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctr="clr-namespace:SelcommWPF.controls" 
+        xmlns:p="clr-namespace:SelcommWPF.Properties"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Selcomm" WindowStyle="None" Left="0" Top="0" ResizeMode="CanMinimize" Width="1920" Height="1050">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Image Source="resources/bg_splash.png" Stretch="Fill"/>
+        <materialDesign:Card Width="500" Height="300" Margin="0,400,0,0" Background="White">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="TextUserID" Width="300" VerticalContentAlignment="Center" Text="TESTER3" KeyDown="TextPassword_KeyDown"
+                        materialDesign:HintAssist.Hint="{x:Static p:Resources.User_Id}" materialDesign:HintAssist.Foreground="Green"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Green" FontSize="16"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                    <PasswordBox x:Name="TextPassword" Width="300" VerticalContentAlignment="Center" Password="iot@Billing9" KeyDown="TextPassword_KeyDown" 
+                                materialDesign:HintAssist.Hint="{x:Static p:Resources.Password}" materialDesign:HintAssist.Foreground="Green" 
+                                materialDesign:TextFieldAssist.UnderlineBrush="Green" FontSize="16"
+                                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                </StackPanel>
+                <StackPanel Margin="0,20,0,0" >
+                    <Border BorderBrush="Black" BorderThickness="0,0,0,1" Width="120" HorizontalAlignment="Right">
+                        <Button Content="{x:Static p:Resources.Forgot_Password}" Padding="0" BorderThickness="0" Foreground="Black" Background="Transparent" 
+                                Click="Button_Forgot_Password_Click"/>
+                    </Border>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,30,0,0" HorizontalAlignment="Center">
+                    <Button Content="{x:Static p:Resources.Login}" Width="100" Cursor="Hand" 
+                            Style="{StaticResource MaterialDesignPaperLightButton}" Click="Button_Login_Click"/>
+                    <Button Content="{x:Static p:Resources.Cancel}" Width="100" Margin="20,0,0,0" Cursor="Hand" 
+                            Style="{StaticResource MaterialDesignPaperLightButton}" Click="Button_Cancel_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:Card>
+        <Grid x:Name="LoadingPanel" Background="#77000000" Visibility="Hidden">
+            <ctr:CircularProgressBar x:Name="progressBar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Margin="0,200,0,0"/>
+        </Grid>
+        <materialDesign:DialogHost HorizontalAlignment="Center" VerticalAlignment="Center" Identifier="MyDialogHost">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel />
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <materialDesign:DialogHost HorizontalAlignment="Center" VerticalAlignment="Center" Identifier="ConfirmDialog">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel />
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Grid>
+</Window>
